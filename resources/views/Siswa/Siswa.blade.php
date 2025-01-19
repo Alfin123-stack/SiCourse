@@ -32,7 +32,7 @@
     <nav class="navbar border border-bottom border-muted navbar-expand-lg navbar-light bg-transparent">
         <div class="container-fluid px-5 py-2">
             <!-- Back Button with functionality -->
-            <a class="btn btn-outline-secondary" href="{{ route('home') }}">
+            <a class="btn btn-outline-secondary" href="/">
                 <i class="fas fa-arrow-left me-2"></i>Kembali
             </a>
         </div>

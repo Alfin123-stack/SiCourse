@@ -224,14 +224,14 @@
   </head>
   <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-primary">
-  <div class="container px-4 py-2">
-  <a class="navbar-brand font-weight-bolder display-4 text-white" href="{{ route('home') }}"><h2>SiCourse</h2></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <nav class="navbar navbar-expand-lg bg-primary">
+      <div class="container px-4 py-2">
+        <a class="navbar-brand font-weight-bolder display-4 text-white small" href="/"><h4>SiCourse</h4></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 small">
             <li class="nav-item">
               <a class="nav-link text-white" href="#tentang">Tentang</a>
             </li>
@@ -246,46 +246,38 @@
             </li>
           </ul>
 
-       <!-- Bagian Autentikasi -->
-       @auth
-            <div class="d-flex justify-content-center gap-4">
-               <!-- Link Riwayat Pembayaran -->
-               <div class='d-flex gap-2 justify-content-center align-items-center'>
-                    <!-- Di dalam view kursus (misalnya di kursus.blade.php) -->
-                      <a href="{{ route('riwayat-pembayaran') }}" class="btn btn-light">
-                          <i class="bi bi-clock-history"></i> Riwayat Pembayaran
-                      </a>
-                </div>
-          
-                <!-- Wrapper untuk ikon dan nama pengguna -->
-                <div class='d-flex gap-2 justify-content-center align-items-center'>
-                    <!-- Icon dengan border bulat dan warna putih -->
-                    <div class="d-flex justify-content-center align-items-center">
-                        <i class="fas fa-user text-white p-2 border border-white rounded-circle"></i>
-                    </div>
-                    <!-- Nama pengguna -->
-                    <a class="nav-link text-white"  href="{{ route('siswa.edit', ['nama' => Auth::user()->name]) }}">{{ auth()->user()->name }}</a>
-                </div>
-                <!-- Logout Button -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type='submit' class="btn btn-outline-light">
-                        <i class="fas fa-sign-in-alt"></i> Logout
-                    </button>
-                </form>
+          <!-- Bagian Autentikasi -->
+          @auth
+          <div class="d-flex justify-content-center gap-3 small">
+            <!-- Link Riwayat Pembayaran -->
+            <a href="{{ route('riwayat-pembayaran') }}" class="btn btn-light btn-sm">
+              <i class="bi bi-clock-history"></i> Riwayat Pembayaran
+            </a>
+            <!-- Wrapper untuk ikon dan nama pengguna -->
+            <div class="d-flex gap-2 justify-content-center align-items-center">
+              <i class="fas fa-user text-white p-2 border border-white rounded-circle"></i>
+              <a class="nav-link text-white" href="{{ route('siswa.edit', ['nama' => Auth::user()->name]) }}">{{ auth()->user()->name }}</a>
             </div>
+            <!-- Logout Button -->
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-sign-in-alt"></i> Logout
+              </button>
+            </form>
+          </div>
+          @else
+          <div class="d-flex small">
+            <!-- Trigger modal login -->
+            <a class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+          </div>
+          @endauth
+        </div>
+      </div>
+    </nav>
 
-        @else
-            <div class="d-flex">
-                <!-- Trigger modal login -->
-                <a class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </a>
-            </div>
-        @endauth
-    </div>
-  </div>
-</nav>
 
 
   <!-- Modal Login -->

@@ -8,11 +8,10 @@ use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DataSeederController;
 
 
-Route::get('/', function () {
-    return redirect()->intended('/home');  // Redirect ke '/home'
-});
+Route::get('/', [MentorController::class, 'home'])->name('home');
 
 // Menggunakan resource untuk controller lainnya
 Route::resource('login', LoginController::class);
@@ -20,6 +19,11 @@ Route::resource('Siswa', SiswaController::class);
 Route::resource('mentor', MentorController::class);
 Route::resource('enrol', EnrolController::class);
 Route::resource('ulasan', UlasanController::class);
+
+
+Route::post('/seed-mentor', [DataSeederController::class, 'seedMentor'])->name('seed.mentor');
+Route::post('/seed-kursus', [DataSeederController::class, 'seedKursus'])->name('seed.kursus');
+
 
 Route::get('/home', function () {
     return view('home');

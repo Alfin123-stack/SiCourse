@@ -46,6 +46,6 @@ class RegisterController extends Controller
         ]);
 
         // Setelah sukses, Anda bisa mengalihkan ke halaman login atau dashboard
-        return redirect()->route('home')->with('success', 'Pendaftaran berhasil, silakan login.');
+        return redirect('/')->with('success', 'Pendaftaran berhasil, silakan login.');
     }
 }

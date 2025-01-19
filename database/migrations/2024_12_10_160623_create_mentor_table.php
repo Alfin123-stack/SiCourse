@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('namaMentor', 30); 
             $table->string('email', 50); 
             $table->string('NoHp', 15); 
-            $table->string('Deksripsi', 15);
+            $table->string('Deksripsi', 255);
             $table->enum('jenis_kelamin', ['L', 'P']); 
-            $table->string('Skill',30);
+            $table->string('Skill',255);
             $table->timestamps();
         });
     }

@@ -13,6 +13,6 @@ class LogoutController extends Controller
     public function __invoke(Request $request)
     {
         Auth::logout();
-        return redirect()->intended('/home');
+        return redirect()->intended('/');
     }
 }

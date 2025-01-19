@@ -225,71 +225,63 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent position-absolute w-100">
-      <div class="container px-4 py-4">
-        <a class="navbar-brand font-weight-bolder display-4 text-white" href="#"><h2>SiCourse</h2></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#tentang">Tentang</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#mentor">Mentor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#learning-path">Learning Path</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="{{ route('kursus.kursus') }}">Kursus</a>
-            </li>
-          </ul>
-           <!-- Bagian Autentikasi -->
-           @auth
-            <div class="d-flex justify-content-center gap-4">
-               <!-- Link Riwayat Pembayaran -->
-               <div class='d-flex gap-2 justify-content-center align-items-center'>
-                    <!-- Di dalam view kursus (misalnya di kursus.blade.php) -->
-                      <a href="{{ route('riwayat-pembayaran') }}" class="btn btn-primary">
-                          <i class="bi bi-clock-history"></i> Riwayat Pembayaran
-                      </a>
-                </div>
-          
-                <!-- Wrapper untuk ikon dan nama pengguna -->
-                <div class='d-flex gap-2 justify-content-center align-items-center'>
-                    <!-- Icon dengan border bulat dan warna putih -->
-                    <div class="d-flex justify-content-center align-items-center">
+        <div class="container px-4 py-4">
+            <a class="navbar-brand font-weight-bolder text-white" href="#"><h4>SiCourse</h4></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 small">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#tentang">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#mentor">Mentor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#learning-path">Learning Path</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('kursus.kursus') }}">Kursus</a>
+                    </li>
+                  
+                </ul>
+                <!-- Bagian Autentikasi -->
+                @auth
+                <div class="d-flex justify-content-center gap-3 small">
+                    <!-- Link Riwayat Pembayaran -->
+                    <a href="{{ route('riwayat-pembayaran') }}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-clock-history"></i> Riwayat Pembayaran
+                    </a>
+                    <!-- Wrapper untuk ikon dan nama pengguna -->
+                    <div class="d-flex gap-2 justify-content-center align-items-center">
                         <i class="fas fa-user text-white p-2 border border-white rounded-circle"></i>
+                        <a class="nav-link text-white" href="{{ route('siswa.edit', ['nama' => Auth::user()->name]) }}">{{ auth()->user()->name }}</a>
                     </div>
-                    <!-- Nama pengguna -->
-                    <a class="nav-link text-white"  href="{{ route('siswa.edit', ['nama' => Auth::user()->name]) }}">{{ auth()->user()->name }}</a>
+                    <!-- Logout Button -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-sign-in-alt"></i> Logout
+                        </button>
+                    </form>
                 </div>
-                <!-- Logout Button -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type='submit' class="btn btn-outline-light">
-                        <i class="fas fa-sign-in-alt"></i> Logout
-                    </button>
-                </form>
+                @else
+                <div class="d-flex small">
+                    <!-- Trigger modal login -->
+                    <a class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </div>
+                @endauth
             </div>
-
-        @else
-            <div class="d-flex">
-                <!-- Trigger modal login -->
-                <a class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </a>
-            </div>
-        @endauth
-
         </div>
-      </div>
     </nav>
 
 
+
   <!-- Modal Login -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -301,12 +293,19 @@
           @csrf
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" required value="{{ old('email') }}">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
           </div>
+          @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                  {{ $error }}
+                @endforeach
+            </div>
+          @endif
           <button type="submit" class="btn btn-primary btn-login">Login</button>
         </form>
         <!-- Link to the registration page -->
@@ -317,6 +316,7 @@
     </div>
   </div>
 </div>
+
 
 
     <!-- Konten -->

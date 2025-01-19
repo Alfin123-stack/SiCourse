@@ -12,7 +12,7 @@ class LoginController extends Controller
      * Handle an authentication attempt.
      */
     public function login(){
-        return view('home');
+        return redirect('/');
     }
     public function authenticate(Request $request): RedirectResponse
     {
@@ -24,11 +24,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/home');
+            return redirect('/');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'akun ini tidak terdaftar jika kamu belum punya akun, silhkan daftar terlebih dahulu',
         ])->onlyInput('email');
     }
 }

@@ -40,31 +40,73 @@
          <!-- akhir section Description -->
 
        <!-- awal mentor -->
-       <div class="container-fluid p-5 bg-primary text-white" id="mentor">
-    <div class="row justify-content-center">
-        <div class="col-12 text-center">
-            <h2>MENTOR KAMI YANG HEBAT</h2>
-            <p>Mentor-mentor kami adalah para profesional dan ahli di bidangnya, <br> siap membimbing Anda dalam setiap langkah pembelajaran.</p>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4 team-member">
-            <img src="https://startbootstrap.github.io/startbootstrap-agency/assets/img/team/3.jpg" alt="Parveen Anand">
-            <h4>Parveen Anand</h4>
-            <p>Programmer Utama</p>
-        </div>
-        <div class="col-md-4 team-member">
-            <img src="https://startbootstrap.github.io/startbootstrap-agency/assets/img/team/2.jpg" alt="Diana Petersen">
-            <h4>Diana Petersen</h4>
-            <p>Arsitek Sistem</p>
-        </div>
-        <div class="col-md-4 team-member">
-            <img src="https://startbootstrap.github.io/startbootstrap-agency/assets/img/team/1.jpg" alt="Larry Parker">
-            <h4>Larry Parker</h4>
-            <p>Pengembang Aplikasi</p>
-        </div>
-    </div>
-</div>
+       @if ($mentor->isEmpty())
+          <div class="container-fluid p-5 bg-primary text-white" id="mentor">
+              <div class="row justify-content-center">
+                  <div class="col-12 text-center">
+                      <h2>MENTOR KAMI YANG HEBAT</h2>
+                      <p>Mentor-mentor kami adalah para profesional dan ahli di bidangnya, <br> siap membimbing Anda dalam setiap langkah pembelajaran.</p>
+                  </div>
+              </div>
+              <div class="row justify-content-center mt-3">
+                  <div class="col-md-6 text-center">
+                      <form action="{{ route('seed.mentor') }}" method="POST" class="d-inline">
+                          @csrf
+                          <button type="submit" class="btn btn-light">
+                              Tambahkan Mentor Pemrograman
+                          </button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          @else
+          <div class="container-fluid p-5 bg-primary text-white" id="mentor">
+              <div class="row justify-content-center">
+                  <div class="col-12 text-center">
+                      <h2>MENTOR KAMI YANG HEBAT</h2>
+                      <p>Mentor-mentor kami adalah para profesional dan ahli di bidangnya, <br> siap membimbing Anda dalam setiap langkah pembelajaran.</p>
+                  </div>
+              </div>
+              <div class="row mt-2">
+                  @foreach ($mentor as $m)
+                  <div class="col-md-4 mb-4">
+                      <div class="card shadow-sm border-light rounded">
+                          <img src="https://randomuser.me/api/portraits/men/{{ rand(1, 99) }}.jpg" alt="{{ $m->namaMentor }}" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;">
+                          
+                          <div class="card-body text-center">
+                              <h5 class="card-title text-primary">{{ $m->namaMentor }}</h5>
+                              
+                              <p>
+                                  <strong><i class="fas fa-envelope"></i> Email:</strong> {{ $m->email }}
+                              </p>
+                              
+                              <p>
+                                  <strong><i class="fas fa-phone"></i> No. HP:</strong> {{ $m->NoHp }}
+                              </p>
+                              
+                              <p>
+                                  <strong><i class="fas fa-user-circle"></i> Deskripsi:</strong> {{ $m->Deskripsi }}
+                              </p>
+                              
+                              <p>
+                                  <strong><i class="fas fa-cogs"></i> Skill:</strong> {{ $m->Skill }}
+                              </p>
+                              
+                              <p>
+                                  <strong><i class="fas fa-venus-mars"></i> Jenis Kelamin:</strong> 
+                                  @if ($m->jenis_kelamin == 'L')
+                                      <i class="fas fa-male"></i> Laki-laki
+                                  @else
+                                      <i class="fas fa-female"></i> Perempuan
+                                  @endif
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+                  @endforeach
+              </div>
+          </div>
+          @endif
 
 
 

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('kursus', function (Blueprint $table) {
             $table->increments('IdKursus'); 
             $table->string('nama', 50); 
-            $table->string('DeksripsiKursus', 255); // Adjusted for longer description
+            $table->string('DeksripsiKursus', 255)->default('Deskripsi belum tersedia'); // Adjusted for longer description
             $table->string('InformasiTambahan', 50); 
             $table->unsignedInteger('IdMentor'); 
             $table->text('materi_kursus'); // Course material

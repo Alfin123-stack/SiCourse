@@ -112,7 +112,7 @@
         </form>
 
         <div class="register-link">
-            <p>Already have an account? <a href="{{ route('home') }}">Login here</a></p>
+            <p>Already have an account? <a href="/">Login here</a></p>
         </div>
     </div>
 
