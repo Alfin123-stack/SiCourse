@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DataSeederController;
 
 
-Route::get('/', [MentorController::class, 'home'])->name('home');
+Route::get('/', [MentorController::class, 'home'])->name('mentor.home');
 
 // Menggunakan resource untuk controller lainnya
 Route::resource('login', LoginController::class);

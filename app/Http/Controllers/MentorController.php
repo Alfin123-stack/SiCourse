@@ -6,13 +6,17 @@ use Illuminate\Http\Request;
 
 class MentorController extends Controller
 {
-
+    // Existing 'home' method
     public function home()
     {
-        // Mengambil data mentor dari database
         $mentor = Mentor::all();
-
-        // Mengirim data ke view 'home'
         return view('home', compact('mentor'));
+    }
+
+    // Add 'index' method
+    public function index()
+    {
+        $mentor = Mentor::all();
+        return view('home', compact('mentor')); 
     }
 }
